@@ -7,8 +7,6 @@ import {Course} from "./course";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'CoursePlanner';
-  faCoffee = faCoffee;
   courses: Course[];
 
   constructor() {

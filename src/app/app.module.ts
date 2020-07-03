@@ -12,9 +12,13 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatButtonModule } from "@angular/material/button";
 import { HomeComponent } from './home/home.component';
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { LoginComponent } from './login/login.component';
-import {MatCardModule} from "@angular/material/card";
-import {MatInputModule} from "@angular/material/input";
+import { LoginComponent } from './auth/login/login.component';
+import { MatCardModule } from "@angular/material/card";
+import { MatInputModule } from "@angular/material/input";
+import { LoginViewComponent } from './auth/login/login-view/login-view.component';
+import { FormsModule } from "@angular/forms";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
+import {AuthService} from "./auth/auth.service";
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -26,7 +30,8 @@ const appRoutes: Routes = [
     AppComponent,
     TopToolbarComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    LoginViewComponent
   ],
   imports: [
     BrowserModule,
@@ -39,8 +44,10 @@ const appRoutes: Routes = [
     FlexLayoutModule,
     MatCardModule,
     MatInputModule,
+    FormsModule,
+    MatSnackBarModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -19,6 +19,9 @@ import { LoginViewComponent } from './auth/login/login-view/login-view.component
 import { FormsModule } from "@angular/forms";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import {AuthService} from "./auth/auth.service";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatMenuModule} from "@angular/material/menu";
+// import { LocalStorage } from '@ngx-pwa/local-storage';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -45,7 +48,9 @@ const appRoutes: Routes = [
     MatCardModule,
     MatInputModule,
     FormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
+    MatMenuModule,
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

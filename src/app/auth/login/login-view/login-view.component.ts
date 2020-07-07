@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import { faExclamationCircle, faLock, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faHandshake, faExclamationCircle, faLock, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import {User} from "../../../users/user";
 
 @Component({
@@ -12,9 +12,19 @@ export class LoginViewComponent implements OnInit {
   faArrowLeft = faArrowLeft;
   faLock = faLock;
   faExclamationCircle = faExclamationCircle;
-  @Input() loginError: string;
-  @Input() user: any;
-  @Output() tryLoginEmitter = new EventEmitter();
+  faHandshake = faHandshake;
+
+  @Input()
+  loginError: string;
+
+  @Input()
+  user: any;
+
+  @Output()
+  tryLoginEmitter = new EventEmitter();
+
+  @Input()
+  tryingToLoginIn: boolean;
 
   constructor() {
     this.user = {};

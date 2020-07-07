@@ -1,5 +1,18 @@
 <mat-toolbar color="primary">
   <button mat-button routerLink="/"><fa-icon [icon]="faCoffee" size="2x"></fa-icon>{{ title }}</button>
   <span class="example-fill-remaining-space"></span>
-  <button mat-button routerLink="/login">Sign in <fa-icon [icon]="faSignInAlt" size="1x"></fa-icon></button>
+  <button *ngIf="!user" mat-button routerLink="/login">Sign in <fa-icon [icon]="faSignInAlt" size="1x"></fa-icon></button>
+  <button *ngIf="user" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    <fa-icon [icon]="faEllipsisV"></fa-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item disabled>
+      <fa-icon [icon]="faUser"></fa-icon>
+      <span *ngIf="user">{{user.username}}</span>
+    </button>
+    <button mat-menu-item>
+      <fa-icon [icon]="faSignOutAlt" size="1x"></fa-icon>
+      <span (click)="logout()">Sign out</span>
+    </button>
+  </mat-menu>
 </mat-toolbar>

@@ -21,10 +21,21 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
 import {AuthService} from "./auth/auth.service";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatMenuModule} from "@angular/material/menu";
-// import { LocalStorage } from '@ngx-pwa/local-storage';
+import {environment} from "../environments/environment";
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import {UserService} from "./users/user.service";
+import {AuthGaurd} from "./auth/auth-gaurd";
+import { UsersViewComponent } from './users/users-view/users-view.component';
+import { UsersListComponent } from './users/users-list/users-list.component';
+import { UsersCreateComponent } from './users/users-create/users-create.component';
+import {MatTableModule} from "@angular/material/table";
+import { UserComponent } from './users/user/user.component';
 
 const appRoutes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: HomeComponent},
+  { path: 'users', component: UsersViewComponent, canActivate: [AuthGaurd] },
   { path: 'login', component: LoginComponent }
 ];
 
@@ -34,7 +45,11 @@ const appRoutes: Routes = [
     TopToolbarComponent,
     HomeComponent,
     LoginComponent,
-    LoginViewComponent
+    LoginViewComponent,
+    UsersViewComponent,
+    UsersListComponent,
+    UsersCreateComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
@@ -51,8 +66,12 @@ const appRoutes: Routes = [
     MatSnackBarModule,
     MatProgressSpinnerModule,
     MatMenuModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
+    MatTableModule
   ],
-  providers: [AuthService],
+  providers: [AuthGaurd],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { faHandshake, faExclamationCircle, faLock, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import {User} from "../../../users/user";
+import {AuthUser} from "../../auth-user";
 
 @Component({
   selector: 'app-login-view',
@@ -17,17 +18,16 @@ export class LoginViewComponent implements OnInit {
   @Input()
   loginError: string;
 
-  @Input()
-  user: any;
+  user: AuthUser;
 
   @Output()
-  tryLoginEmitter = new EventEmitter();
+  tryLoginEmitter = new EventEmitter<AuthUser>();
 
   @Input()
   tryingToLoginIn: boolean;
 
   constructor() {
-    this.user = {};
+    this.user = new AuthUser();
   }
 
   tryLogin() {

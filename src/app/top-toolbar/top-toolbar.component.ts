@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {  faUser, faEllipsisV, faCoffee, faSignInAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import {  faUser, faEllipsisV, faCoffee, faSignInAlt, faSignOutAlt, faBookOpen } from '@fortawesome/free-solid-svg-icons';
 import {User} from "../users/user";
 import {AuthService} from "../auth/auth.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
@@ -14,25 +14,28 @@ export class TopToolbarComponent implements OnInit {
 
   @Input() title: string;
   faCoffee = faCoffee;
+  faBookOpen = faBookOpen;
   faUser = faUser;
   faSignInAlt = faSignInAlt;
   faSignOutAlt = faSignOutAlt;
   faEllipsisV = faEllipsisV;
-  user: User;
-  constructor(private auth: AuthService, public loginValidationBar: MatSnackBar, private router: Router) {
-    this.user = auth.currentUser();
-    console.log(this.user);
-  }
+  user: any;
+  constructor(private auth: AuthService, public loginValidationBar: MatSnackBar, private router: Router) { }
 
   logout() {
-    this.router.navigate(['/login']).then(() => {
-      this.loginValidationBar.open("You are logged out","OK", {
-        duration: 3000,
+    this.auth.logout().subscribe(() => {
+      this.router.navigate(['/login']).then(() => {
+        this.loginValidationBar.open("You are logged out","OK", {
+          duration: 3000,
+        });
       });
     });
   }
 
   ngOnInit(): void {
+    this.auth.currentUser().subscribe(user => {
+      this.user = user;
+    })
   }
 
 }

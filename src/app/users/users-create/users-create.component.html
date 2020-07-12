@@ -1,0 +1,38 @@
+<form class="example-form" *ngIf="creatingUser" (ngSubmit)="onSubmit()">
+  <mat-card>
+    <mat-card-content>
+      <h3><fa-icon [icon]="faUser"></fa-icon> Add User</h3>
+      <table cellSpacing="0">
+        <tr>
+
+          <td>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Username">
+            </mat-form-field>
+          </td>
+
+          <td>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Email">
+            </mat-form-field>
+          </td>
+
+          <button mat-icon-button color="primary" type="button" (click)="createNewUser(false)">
+            <fa-icon [icon]="faSave"></fa-icon>
+          </button>
+
+          <button mat-icon-button color="warn" type="button" (click)="createNewUser(false)">
+            <fa-icon [icon]="faBan"></fa-icon>
+          </button>
+
+        </tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+</form>
+<div *ngIf="!creatingUser">
+  <button mat-icon-button color="primary" (click)="createNewUser(true)">
+    <fa-icon [icon]="faPlus"></fa-icon>
+  </button>
+</div>
+

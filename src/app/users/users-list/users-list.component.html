@@ -1,0 +1,7 @@
+<!--<p *ngFor="let user of users | async">-->
+<!--  {{user.username}}-->
+<!--</p>-->
+
+<div fxLayout="row wrap">
+  <app-user fxFlex="50%" *ngFor="let user of users | async" [user]="user"></app-user>
+</div>

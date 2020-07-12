@@ -1,0 +1,19 @@
+<mat-card style="margin: 2em">
+  <mat-card-content fxLayout="row">
+    <div fxFlex="4em"><fa-icon [icon]="faUser" size="4x"></fa-icon></div>
+    <div fxFlex>
+      <h3>{{user?.username}}</h3>
+      <h4>{{user?.email}}</h4>
+    </div>
+    <div *ngIf="!validationDelete" fxFlex="3em" fxFlexAlign="end" fxLayout="column">
+        <button mat-icon-button color="primary"><fa-icon [icon]="faInfo"></fa-icon></button>
+        <button mat-icon-button color="accent"><fa-icon [icon]="faEdit"></fa-icon></button>
+        <button mat-icon-button color="warn" (click)="deleteValidation(true)"><fa-icon [icon]="faTrashAlt"></fa-icon></button>
+    </div>
+    <div *ngIf="validationDelete" fxFlex="3em" fxFlexAlign="end" fxLayout="column">
+      <h4>Are You Sure?</h4>
+      <button mat-icon-button color="primary" (click)="deleteValidation(false)"><fa-icon [icon]="faThumbsDown"></fa-icon></button>
+      <button mat-icon-button color="warn"><fa-icon [icon]="faThumbsUp"></fa-icon></button>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -1,32 +1,44 @@
-<form class="example-form" *ngIf="creatingUser" (ngSubmit)="onSubmit()">
+<form class="example-form"
+      *ngIf="creatingUser"
+      #f = "ngForm"
+      fxFlexFill fxLayout="row" fxLayoutAlign="center start"
+      (ngSubmit)="onSubmit()">
   <mat-card>
-    <mat-card-content>
+    <mat-card-content fxLayout="column" fxFlex="400px">
       <h3><fa-icon [icon]="faUser"></fa-icon> Add User</h3>
-      <table cellSpacing="0">
-        <tr>
+        <mat-form-field class="example-full-width">
+          <input matInput
+                 placeholder="Username"
+                 fxFlex="100"
+                 required
+                 minlength="3"
+                 [(ngModel)]="user.username"
+                 name="username"
+                 #username="ngModel">
+          <mat-error *ngIf="username.hasError('required')" > Username Required </mat-error>
+          <mat-error *ngIf="username.hasError('minlength')" > Username too short (min. 3 char) </mat-error>
+        </mat-form-field>
 
-          <td>
-            <mat-form-field class="example-full-width">
-              <input matInput placeholder="Username">
-            </mat-form-field>
-          </td>
+        <mat-form-field class="example-full-width">
+          <input matInput
+                 placeholder="Email"
+                 required
+                 email
+                 #email="ngModel"
+                 [(ngModel)]="user.email"
+                 name="email">
+          <mat-error *ngIf="email.hasError('required')"> Email Required </mat-error>
+          <mat-error *ngIf="email.hasError('email')"> Invalid Email </mat-error>
+        </mat-form-field>
 
-          <td>
-            <mat-form-field class="example-full-width">
-              <input matInput placeholder="Email">
-            </mat-form-field>
-          </td>
+      <button mat-icon-button color="primary" type="submit" [disabled]="f.invalid">
+        <fa-icon [icon]="faSave"></fa-icon>
+      </button>
 
-          <button mat-icon-button color="primary" type="button" (click)="createNewUser(false)">
-            <fa-icon [icon]="faSave"></fa-icon>
-          </button>
+      <button mat-icon-button color="warn" type="button" (click)="createNewUser(false)">
+        <fa-icon [icon]="faBan"></fa-icon>
+      </button>
 
-          <button mat-icon-button color="warn" type="button" (click)="createNewUser(false)">
-            <fa-icon [icon]="faBan"></fa-icon>
-          </button>
-
-        </tr>
-      </table>
     </mat-card-content>
   </mat-card>
 </form>

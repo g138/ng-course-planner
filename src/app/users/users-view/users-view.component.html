@@ -1,3 +1,5 @@
 <app-top-toolbar [title]="'CoursePlaner'"></app-top-toolbar>
-<app-users-create (createUserEvent)="creatingUserEvent($event)"></app-users-create>
+
+<app-users-create (createUserEvent)="creatingUserEvent($event)" (creatingUserEvent)="userCreation($event)"></app-users-create>
+
 <app-users-list *ngIf="!creatingUser" [users]="users"></app-users-list>

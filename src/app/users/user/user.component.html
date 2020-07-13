@@ -13,7 +13,7 @@
     <div *ngIf="validationDelete" fxFlex="3em" fxFlexAlign="end" fxLayout="column">
       <h4>Are You Sure?</h4>
       <button mat-icon-button color="primary" (click)="deleteValidation(false)"><fa-icon [icon]="faThumbsDown"></fa-icon></button>
-      <button mat-icon-button color="warn"><fa-icon [icon]="faThumbsUp"></fa-icon></button>
+      <button mat-icon-button color="warn" (click)="delete()"><fa-icon [icon]="faThumbsUp"></fa-icon></button>
     </div>
   </mat-card-content>
 </mat-card>

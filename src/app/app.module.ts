@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import 'hammerjs';
 import { RouterModule, Routes } from "@angular/router";
-
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -16,21 +15,19 @@ import { LoginComponent } from './auth/login/login.component';
 import { MatCardModule } from "@angular/material/card";
 import { MatInputModule } from "@angular/material/input";
 import { LoginViewComponent } from './auth/login/login-view/login-view.component';
-import { FormsModule } from "@angular/forms";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
-import {AuthService} from "./auth/auth.service";
-import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
-import {MatMenuModule} from "@angular/material/menu";
-import {environment} from "../environments/environment";
+import { MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import { MatMenuModule } from "@angular/material/menu";
+import { environment } from "../environments/environment";
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
-import {UserService} from "./users/user.service";
-import {AuthGaurd} from "./auth/auth-gaurd";
+import { FormsModule } from '@angular/forms';
+import { AuthGaurd } from "./auth/auth-gaurd";
 import { UsersViewComponent } from './users/users-view/users-view.component';
 import { UsersListComponent } from './users/users-list/users-list.component';
 import { UsersCreateComponent } from './users/users-create/users-create.component';
-import {MatTableModule} from "@angular/material/table";
+import { MatTableModule } from "@angular/material/table";
 import { UserComponent } from './users/user/user.component';
 
 const appRoutes: Routes = [

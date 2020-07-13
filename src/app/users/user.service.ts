@@ -1,34 +1,50 @@
 import { Injectable } from '@angular/core';
 import {AngularFirestore} from "angularfire2/firestore";
-import {Observable} from "rxjs";
+import {Observable, Subject} from "rxjs";
 import {User} from "./user";
-import * as firebase from "firebase";
-import {AngularFireStorageReference} from "@angular/fire/storage";
-import {AngularFirestoreCollection} from "@angular/fire/firestore";
-import {map} from "rxjs/operators";
+import 'rxjs/Rx';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
+  private availableUsers: User[] = [];
+  UserChanges = new Subject<User[]>();
+
   constructor( private afs: AngularFirestore) { }
-  userCollection: AngularFirestoreCollection<any>;
-  collection: any;
+
   getUsers(){
-    // this.afs.collection('users').stateChanges().subscribe(a => {
-    //   const len = a.length;
-    //   while (len >= 0) {
-    //     console.log(a[0].payload.doc.id);
-    //   }
-    //
-    // });
-    this.userCollection = this.afs.collection<any>('users');
-    this.collection = this.userCollection.snapshotChanges()
-      .pipe(
-        map(actions => actions.map(a => a.payload.doc.data()))
-      );
-    return this.afs.collection('users').valueChanges();
+    this.afs
+      .collection('users')
+      .snapshotChanges()
+      .map(docArray => {
+        return docArray.map(doc => {
+          return {
+            id: doc.payload.doc.id,
+            username: doc.payload.doc.data()['username'],
+            email: doc.payload.doc.data()['email'],
+            password: doc.payload.doc.data()['password']
+          };
+        });
+      })
+      .subscribe((users: User[]) => {
+        console.log(users);
+        this.availableUsers = users;
+        this.UserChanges.next([...this.availableUsers]);
+      });
+  }
+
+  createUser(user: User) {
+    let addUser = this.afs.collection('users');
+    addUser.add({
+      username: user.username,
+      email: user.email
+    });
+  }
+
+  deleteUser(id: string) {
+    this.afs.collection('users').doc(id).delete();
   }
 
 }

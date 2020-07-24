@@ -1,7 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { faUser, faSave, faBan, faPlus } from "@fortawesome/free-solid-svg-icons";
 import {User} from "../user";
-import {NgForm} from "@angular/forms";
+import {FormGroup, NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-users-create',
@@ -27,10 +27,12 @@ export class UsersCreateComponent implements OnInit {
     this.createUserEvent.emit(value);
   }
 
-  onSubmit() {
-    this.creatingUserEvent.emit(this.user);
-    this.creatingUser = false;
-    this.clear();
+  onSubmit(form) {
+    if(form.valid) {
+      this.creatingUserEvent.emit(this.user);
+      this.creatingUser = false;
+      this.clear();
+    }
   }
 
   clear() {

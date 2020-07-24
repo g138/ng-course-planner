@@ -29,7 +29,8 @@ import { UsersListComponent } from './users/users-list/users-list.component';
 import { UsersCreateComponent } from './users/users-create/users-create.component';
 import { MatTableModule } from "@angular/material/table";
 import { UserComponent } from './users/user/user.component';
-
+import {MustMatch} from "./users/must-match";
+import { ConfirmEqualValidatorDirective } from "./users/ConfirmEqualValidatorDirective";
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'users', component: UsersViewComponent, canActivate: [AuthGaurd] },
@@ -46,7 +47,9 @@ const appRoutes: Routes = [
     UsersViewComponent,
     UsersListComponent,
     UsersCreateComponent,
-    UserComponent
+    UserComponent,
+    MustMatch,
+    ConfirmEqualValidatorDirective
   ],
   imports: [
     BrowserModule,

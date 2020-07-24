@@ -2,42 +2,71 @@
       *ngIf="creatingUser"
       #f = "ngForm"
       fxFlexFill fxLayout="row" fxLayoutAlign="center start"
-      (ngSubmit)="onSubmit()">
+      (ngSubmit)="onSubmit(f)">
   <mat-card>
     <mat-card-content fxLayout="column" fxFlex="400px">
       <h3><fa-icon [icon]="faUser"></fa-icon> Add User</h3>
-        <mat-form-field class="example-full-width">
-          <input matInput
-                 placeholder="Username"
-                 fxFlex="100"
-                 required
-                 minlength="3"
-                 [(ngModel)]="user.username"
-                 name="username"
-                 #username="ngModel">
-          <mat-error *ngIf="username.hasError('required')" > Username Required </mat-error>
-          <mat-error *ngIf="username.hasError('minlength')" > Username too short (min. 3 char) </mat-error>
-        </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput
+               placeholder="Username"
+               fxFlex="100"
+               required
+               minlength="3"
+               [(ngModel)]="user.username"
+               name="username"
+               #username="ngModel">
+        <mat-error *ngIf="username.hasError('required')" > Username Required </mat-error>
+        <mat-error *ngIf="username.hasError('minlength')" > Username too short (min. 3 char) </mat-error>
+      </mat-form-field>
 
-        <mat-form-field class="example-full-width">
-          <input matInput
-                 placeholder="Email"
-                 required
-                 email
-                 #email="ngModel"
-                 [(ngModel)]="user.email"
-                 name="email">
-          <mat-error *ngIf="email.hasError('required')"> Email Required </mat-error>
-          <mat-error *ngIf="email.hasError('email')"> Invalid Email </mat-error>
-        </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput
+               placeholder="Email"
+               required
+               email
+               #email="ngModel"
+               [(ngModel)]="user.email"
+               name="email">
+        <mat-error *ngIf="email.hasError('required')"> Email Required </mat-error>
+        <mat-error *ngIf="email.hasError('email')"> Invalid Email </mat-error>
+      </mat-form-field>
 
-      <button mat-icon-button color="primary" type="submit" [disabled]="f.invalid">
-        <fa-icon [icon]="faSave"></fa-icon>
-      </button>
+      <mat-form-field>
+        <input matInput
+               placeholder="Password"
+               required
+               minlength="6"
+               type="password"
+               #password="ngModel"
+               [(ngModel)]="user.password"
+               name="password">
+        <mat-hint align="end">{{ password.value?.length }} / 6</mat-hint>
+        <mat-error *ngIf="password.hasError('required')">Password Required</mat-error>
+        <mat-error *ngIf="password.hasError('minlength')">Password too short (min. 6 char)</mat-error>
+      </mat-form-field>
 
-      <button mat-icon-button color="warn" type="button" (click)="createNewUser(false)">
-        <fa-icon [icon]="faBan"></fa-icon>
-      </button>
+      <mat-form-field>
+        <input matInput
+               placeholder="Confirm Password"
+               appConfirmEqualValidator="password"
+               required
+               type="password"
+               #confirmpassword="ngModel"
+               [(ngModel)]="user.confirmPassword"
+               name="confirmpassword">
+        <mat-error *ngIf="confirmpassword.hasError('required')">Confirm Password Required</mat-error>
+        <mat-error *ngIf="confirmpassword.errors?.notEqual && !confirmpassword.errors?.required">Password Mismatch</mat-error>
+      </mat-form-field>
+
+      <mat-card-actions fxLayout="row" fxLayoutAlign="end">
+        <button mat-icon-button color="primary" type="submit" [disabled]="f.invalid">
+          <fa-icon [icon]="faSave"></fa-icon>
+        </button>
+        <button mat-icon-button color="warn" type="button" (click)="createNewUser(false)">
+          <fa-icon [icon]="faBan"></fa-icon>
+        </button>
+
+      </mat-card-actions>
 
     </mat-card-content>
   </mat-card>
